@@ -10,12 +10,19 @@ import random
 # Set page configuration
 st.set_page_config(page_title='FLIXANALYTICS', page_icon='🎬', layout='wide')
 
+
+
 # Load custom CSS file
 def local_css(file_path):
-    with open(file_path) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    if os.path.exists(file_path):
+        with open(file_path) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    else:
+        st.warning(f"CSS file '{file_path}' not found. Continuing without custom styles.")
 
+# Attempt to load the CSS file
 local_css("style.css")
+
 # User authentication functions
 user_data_file = 'users_data.json'
 
